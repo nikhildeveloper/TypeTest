@@ -64,9 +64,9 @@ startbtn.addEventListener('click',function(){
             'time':time,
             'type':type
         }
-        sessionStorage.clear()
+        localStorage.clear()
         inputs=[]
         inputs.push(obj)
-        sessionStorage.setItem('inputs',JSON.stringify(inputs))
+        localStorage.setItem('inputs',JSON.stringify(inputs))
     
 })
