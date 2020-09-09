@@ -4,8 +4,12 @@ startbtn = document.querySelector('.start')
 submitbtn = document.querySelector('.submit')
 times = document.querySelectorAll('.time')
 types = document.querySelectorAll('.type')
+outer = document.querySelector('.outer')
+random = document.querySelector('#random')
+main = document.querySelector('#main')
+randomtxt = document.querySelector('#randomtxt')
 var time;
-
+const app = new cons()
 
 timeElements.addEventListener('click',function(e){
     time = e.target.value
@@ -52,21 +56,26 @@ submitbtn.addEventListener('click',function(){
     }
 
 })
-
-
 startbtn.addEventListener('click',function(){
+
+    outer.style.display='none'
+    main.style.display='block'
+})
+
+random.addEventListener('click',function(){
   
-
+        
+        
+        
     
-        var inputs
+        app.get('http://api.quotable.io/random',function(err,data){
+    if(err){
+        console.log(err)
+    }
+    else{
+        randomtxt.textContent = data.content
+    }
+})
 
-        let obj={
-            'time':time,
-            'type':type
-        }
-        localStorage.clear()
-        inputs=[]
-        inputs.push(obj)
-        localStorage.setItem('inputs',JSON.stringify(inputs))
     
 })
