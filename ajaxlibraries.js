@@ -15,8 +15,14 @@ cons.prototype.get = function(url,callback){
             callback(`error found ${self.status}`)
         }
     }
-    this.xhr.setRequestHeader("x-rapidapi-host", "wordsapiv1.p.rapidapi.com");
-    this.xhr.setRequestHeader("x-rapidapi-key", "40a04830d2mshabe9414b355c6c4p11095djsnf22fde77863e");
+    //wordsAPI
+    // this.xhr.setRequestHeader("x-rapidapi-host", "wordsapiv1.p.rapidapi.com");
+    // this.xhr.setRequestHeader("x-rapidapi-key", "40a04830d2mshabe9414b355c6c4p11095djsnf22fde77863e");
+    
+    //BAcon (sentences)
+    // this.xhr.setRequestHeader("x-rapidapi-host", "baconator-bacon-ipsum.p.rapidapi.com");
+    // this.xhr.setRequestHeader("x-rapidapi-key", "40a04830d2mshabe9414b355c6c4p11095djsnf22fde77863e");
+    
 
     this.xhr.send()
 }

@@ -52,7 +52,7 @@ submitbtn.addEventListener('click',function(){
        
         startbtn.removeAttribute('disabled')
         startbtn.classList.add('startbtn')
-        console.log(startbtn)
+       
     }
 
 })
@@ -64,19 +64,18 @@ startbtn.addEventListener('click',function(){
 
 random.addEventListener('click',function(){
   
-        
-        
-        
-    
-        app.get("https://wordsapiv1.p.rapidapi.com/words/?random=true",function(err,data){
+        console.log('1')
+        app.get("https://baconator-bacon-ipsum.p.rapidapi.com/?sentences=1&paras=0&start-with-lorem=0&type=all-meat",function(err,data){
     if(err){
         console.log(err)
     }
     else{
-        // randomtxt.textContent = data
-        console.log(data.word)
+         //randomtxt.textContent = data
+        console.log(data)
     }
 })
 
-    
+// "https://wordsapiv1.p.rapidapi.com/sentences/?random=true"--> random words
+//"https://baconator-bacon-ipsum.p.rapidapi.com/?sentences=1&paras=0&start-with-lorem=0&type=all-meat" -->sentences
+//"https://baconator-bacon-ipsum.p.rapidapi.com/?sentences=0&paras=1&start-with-lorem=0&type=all-meat" -->paragraphs
 })
