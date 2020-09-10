@@ -65,13 +65,13 @@ startbtn.addEventListener('click',function(){
 random.addEventListener('click',function(){
   
         console.log('1')
-        app.get("https://baconator-bacon-ipsum.p.rapidapi.com/?sentences=1&paras=0&start-with-lorem=0&type=all-meat",function(err,data){
+        app.get("https://baconator-bacon-ipsum.p.rapidapi.com/?sentences=0&paras=1&start-with-lorem=0&type=all-meat",function(err,data){
     if(err){
         console.log(err)
     }
     else{
          //randomtxt.textContent = data
-        console.log(data[0])
+        console.log(data)
     }
 })
 
