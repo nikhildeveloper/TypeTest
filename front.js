@@ -68,12 +68,13 @@ random.addEventListener('click',function(){
         
         
     
-        app.get('http://api.quotable.io/random',function(err,data){
+        app.get("https://wordsapiv1.p.rapidapi.com/words/?random=true",function(err,data){
     if(err){
         console.log(err)
     }
     else{
-        randomtxt.textContent = data.content
+        // randomtxt.textContent = data
+        console.log(data.word)
     }
 })
 

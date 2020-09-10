@@ -2,9 +2,9 @@ cons = function(){
     this.xhr = new XMLHttpRequest()    
 }
 
+//GET
 cons.prototype.get = function(url,callback){
     this.xhr.open('GET',url,true)
-    this.xhr.send()
     let self
     self = this.xhr
     this.xhr.onload = function(){
@@ -15,4 +15,8 @@ cons.prototype.get = function(url,callback){
             callback(`error found ${self.status}`)
         }
     }
+    this.xhr.setRequestHeader("x-rapidapi-host", "wordsapiv1.p.rapidapi.com");
+    this.xhr.setRequestHeader("x-rapidapi-key", "40a04830d2mshabe9414b355c6c4p11095djsnf22fde77863e");
+
+    this.xhr.send()
 }
