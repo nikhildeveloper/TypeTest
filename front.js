@@ -71,7 +71,7 @@ random.addEventListener('click',function(){
     }
     else{
          //randomtxt.textContent = data
-        console.log(data)
+        console.log(data[0])
     }
 })
 
