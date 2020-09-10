@@ -15,6 +15,7 @@ cons.prototype.get = function(url,callback){
             callback(`error found ${self.status}`)
         }
     }
+    //Access-Control-Allow-Origin = 
     //wordsAPI
     // this.xhr.setRequestHeader("x-rapidapi-host", "wordsapiv1.p.rapidapi.com");
     // this.xhr.setRequestHeader("x-rapidapi-key", "40a04830d2mshabe9414b355c6c4p11095djsnf22fde77863e");
@@ -26,5 +27,7 @@ cons.prototype.get = function(url,callback){
     //BAcon (paragraphs)
     // this.xhr.setRequestHeader("x-rapidapi-host", "baconator-bacon-ipsum.p.rapidapi.com");
     // this.xhr.setRequestHeader("x-rapidapi-key", "40a04830d2mshabe9414b355c6c4p11095djsnf22fde77863e");
+    this.xhr.setRequestHeader("x-rapidapi-host", "mashape-community-skate-ipsum.p.rapidapi.com");
+    this.xhr.setRequestHeader("x-rapidapi-key", "40a04830d2mshabe9414b355c6c4p11095djsnf22fde77863e");
     this.xhr.send()
 }

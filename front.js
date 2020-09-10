@@ -65,7 +65,7 @@ startbtn.addEventListener('click',function(){
 random.addEventListener('click',function(){
   
         console.log('1')
-        app.get("https://baconator-bacon-ipsum.p.rapidapi.com/?sentences=0&paras=1&start-with-lorem=0&type=all-meat",function(err,data){
+        app.get("https://mashape-community-skate-ipsum.p.rapidapi.com/1/1/JSON",function(err,data){
     if(err){
         console.log(err)
     }
