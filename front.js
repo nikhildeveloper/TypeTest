@@ -65,7 +65,7 @@ startbtn.addEventListener('click',function(){
 random.addEventListener('click',function(){
   
         console.log('1')
-        app.get("https://mashape-community-skate-ipsum.p.rapidapi.com/1/1/JSON",function(err,data){
+        app.get("https://baconator-bacon-ipsum.p.rapidapi.com/?sentences=1&paras=0&start-with-lorem=0&type=all-meat",function(err,data){
     if(err){
         console.log(err)
     }
@@ -76,6 +76,7 @@ random.addEventListener('click',function(){
 })
 
 // "https://wordsapiv1.p.rapidapi.com/sentences/?random=true"--> random words
-//"https://baconator-bacon-ipsum.p.rapidapi.com/?sentences=1&paras=0&start-with-lorem=0&type=all-meat" -->sentences
-//"https://baconator-bacon-ipsum.p.rapidapi.com/?sentences=0&paras=1&start-with-lorem=0&type=all-meat" -->paragraphs
+//"https://baconator-bacon-ipsum.p.rapidapi.com/?sentences=1&paras=0&start-with-lorem=0&type=all-meat" -->sentences(meat)
+//"https://baconator-bacon-ipsum.p.rapidapi.com/?sentences=0&paras=1&start-with-lorem=0&type=all-meat" -->paragraphs(meat)
+//"https://mashape-community-skate-ipsum.p.rapidapi.com/1/1/JSON" -->paragraphs(skate)
 })
