@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Typing Test</title>
-
+    
     <link rel="stylesheet" href="front.css">
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 </head>
@@ -32,9 +32,9 @@
                 <button class="type " value="1">paragraph</button>
                 <button class="type " value="2">sentences</button>
                 </div>
-                <button  class="submit">submit</button>
+                <br>
                 <hr>
-                <center><button class="start" disabled>Start</button></center>
+                <center><button class="start" >Start</button></center>
                 
             </div>
         </div>
@@ -42,13 +42,39 @@
             <img src="images/img1.svg">
         </div>
     </div>
-    <div id='main' style="display: none;">
-        <button id='random'>start</button><br><br><br><hr>
-        <h3 id='randomtxt'></h3>
+    <div class="gif" style="display: none;">
+        <img class="gifpy" src="images/loading.gif">
     </div>
+    <div id='main'>
+        <div class="test-text">
+            bvpiuivuiduviuduvdisplay: inline;display: inline;display: inline;display: inline;display: inline;display: inline;display: inline;display: inline;display: inline;display: inline;display: inline;display: inline;display: inline;display: inline;
+        </div>
+        <div class="test-time">
+            <div class="timer">
+                <div class="min">
+                   
+                </div>:
+                <div class="sec">
+                    00
+                </div>
+
+            </div>
+            <div class="timebtns">
+                <button class="time-start">Start</button>
+                <button class="time-stop">Stop</button>
+            </div>
+        </div>
+    </div>
+        <div class="input-text ">
+            <div class="inner-text">
+                <textarea class="texting" name="innertext" rows="4" cols="50" disabled></textarea>
+            </div>
+        </div>
+    
+    
     <script src="ajaxlibraries.js"></script>
     <script src="front.js"></script>
 </body>
 
-<!-- <script src="back.js"></script> -->
+
 </html>
