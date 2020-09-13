@@ -19,12 +19,18 @@ min= document.querySelector('.min')
 sec= document.querySelector('.sec')
 texting= document.querySelector('.texting')
 timer =document.querySelector('.timer')
+result =document.querySelector('.result')
+resulttext1 =document.querySelector('#resultText1')
+resulttext2 =document.querySelector('#resultText2')
+
 var time;
 var minutes
+var characterCount=0
 const app = new cons()
 const key = '40a04830d2mshabe9414b355c6c4p11095djsnf22fde77863e'
 main.style.display='none'
 inputText.style.display='none'
+result.style.display='none'
 timeElements.addEventListener('click',function(e){
     time = e.target.value
     for(i=0;i<4;i++){
@@ -83,6 +89,9 @@ function verification(){
     //alert('PLEASE START TIME FOR TEST')
     apicall()
     // document.body.style.backgroundColor='blue'
+    minutes=Number(time)
+    if(minutes<=9){min.innerHTML=`0${minutes}`}
+        else{min.innerHTML=minutes}
     }  
     else{
         outer.style.display='flex'
@@ -126,10 +135,15 @@ function printMsg()
     if(minutes===0 && seconds==0){
         stoping()
         texting.disabled=true
-        timer.textContent='Time up'
+        
+        //timer.textContent='Time up'
         timer.style.color='red'
         timeStop.disabled=true
-        timeStop.disabled=true
+        result.style.display='flex'
+        document.body.style.pointerEvents='none'
+        result.style.pointerEvents='all'
+        wpm = speed()
+        resulttext1.textContent=`WPS :${wpm}`
         
     }else{
        seconds=59
@@ -214,7 +228,7 @@ function apicall()
                     //randomtxt.textContent = data
                     let matter0 = data[0].replace(/  +/g, ' ');
                     let matter1 = matter0.split('')
-                    let matter2 = matter1.slice(10,250)
+                    let matter2 = matter1.slice(10,160)
                     final = matter2.join('')
                     
                     injection(final.trim())
@@ -267,6 +281,7 @@ texting.addEventListener('input',()=>{
             testCharacter.classList.add('correct')
            testCharacter.classList.remove('incorrect')
                 correct=true
+                characterCount++
             }
             else{
             
@@ -283,3 +298,32 @@ texting.addEventListener('input',()=>{
         testText.innerText=''
     }
 })
+
+function funcclose()
+{
+  result.style.display='none'
+  
+    result.style.pointerEvents
+    document.body.style.pointerEvents='all'
+    main.style.display='none'
+    inputText.style.display='none'
+    outer.style.display='flex'
+    timer.style.color='black'
+    stoping()
+     id=0
+     seconds=60
+     count=0
+     timeStop.disabled=false
+     texting.value=null
+     testText.innerText=''
+    console.log(minutes)
+    console.log(time)
+    
+}
+function speed()
+{
+    let T = Number(time)
+    let charCount = characterCount
+    return (5*charCount)/T
+}
+
