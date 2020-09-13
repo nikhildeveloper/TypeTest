@@ -214,7 +214,7 @@ function apicall()
                     //randomtxt.textContent = data
                     let matter0 = data[0].replace(/  +/g, ' ');
                     let matter1 = matter0.split('')
-                    let matter2 = matter1.slice(10,280)
+                    let matter2 = matter1.slice(10,250)
                     final = matter2.join('')
                     
                     injection(final.trim())
