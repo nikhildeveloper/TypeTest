@@ -131,18 +131,11 @@ h6{
     
 }
 
-.input-text{
-    /* align-items: center; */
-    /* justify-content: center; */
-    margin-left: 15%;
-    margin-top: 5rem;
-    word-wrap: break-word;
-    
-}
+
 
 .texting{
     border: 0;
-    width: 500px;
+    width: 850px;
     font-size: 20px;
     height: 10rem;
     padding: 20px;
@@ -151,6 +144,8 @@ h6{
     border-radius: 10px;
     box-shadow: -8px -8px 10px #ffffff70,3px 3px 15px #000000;
     outline: none;
+    margin-top: 100px;
+    margin-left: 50px;
 }
 .timer{
     display: inline-flex;
@@ -202,4 +197,11 @@ h6{
 .gifpy{
     height: 400px;
     width: 400px;
+}
+.correct{
+    color: green;
+}
+.incorrect{
+    color: red;
+    text-decoration: underline;
 }

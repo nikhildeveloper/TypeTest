@@ -11,6 +11,7 @@ randomtxt = document.querySelector('#randomtxt')
 content = document.querySelector('.content')
 img= document.querySelector('.img')
 inputText = document.querySelector('.input-text')
+testText = document.querySelector('.test-text')
 gif= document.querySelector('.gif')
 timeStart= document.querySelector('.time-start')
 timeStop= document.querySelector('.time-stop')
@@ -79,7 +80,8 @@ function verification(){
     gif.style.display='none'
     main.style.display='flex'
     inputText.style.display='flex'
-    alert('PLEASE START TIME FOR TEST')
+    //alert('PLEASE START TIME FOR TEST')
+    apicall()
     // document.body.style.backgroundColor='blue'
     }  
     else{
@@ -126,6 +128,8 @@ function printMsg()
         texting.disabled=true
         timer.textContent='Time up'
         timer.style.color='red'
+        timeStop.disabled=true
+        timeStop.disabled=true
         
     }else{
        seconds=59
@@ -157,40 +161,122 @@ function printMsg()
 
 
 
-// random.addEventListener('click',function(){
-//     //words
-//     if(type==='0'){
-//         app.get("https://wordsapiv1.p.rapidapi.com/words/?random=true",key,"wordsapiv1.p.rapidapi.com",function(err,data){
-//             if(err)
-//             {
-//                 alert(err)
-//             }                                                                                              
-//             else
-//             {
-//                 //randomtxt.textContent = data
-//                 console.log(data)
-//             }
-//         })
-//     }
-//     else{//paragraphs
-//         if(type==='1'|| type==='0')
-//         {
-//             app.get("https://contentai-net-text-generation.p.rapidapi.com/text-generation/api/?category=health-and-medicine",key, "contentai-net-text-generation.p.rapidapi.com",function(err,data){
-//                 if(err)
-//                 {
-//                     alert(err)
-//                 }
-//                 else
-//                 {
-//                     //randomtxt.textContent = data
-//                     console.log(data)
-//                 }
-//             })
-//         }
-//     }
+function apicall()
+{
+    texting.value=null
+    //words
+    if(type==='0'){
+        
+        app.get("https://wordsapiv1.p.rapidapi.com/words/?random=true",key,"wordsapiv1.p.rapidapi.com",function(err,data){
+            if(err)
+            {
+                alert(err)
+            }                                                                                              
+            else
+            {
+                console.log(data)
+                //randomtxt.textContent = data
+                injection(data.word)
+            }
+        })
+    }
+    else{//paragraphs
+        if(type==='2')
+        {
+            
+            app.get("https://mashape-community-skate-ipsum.p.rapidapi.com/1/1/JSON" ,key,"mashape-community-skate-ipsum.p.rapidapi.com",function(err,data){
+               
+                if(err)
+                {
+                    alert(err)
+                }
+                else
+                {
+                    //randomtxt.textContent = data
+                    let matter = data[0].split('')
+                    let matter2 = matter.slice(5,50)
+                    final = matter2.join('')
+                    injection(final)
+                }
+            })
+
+        }
+        else{
+            app.get("https://mashape-community-skate-ipsum.p.rapidapi.com/1/1/JSON" ,key,"mashape-community-skate-ipsum.p.rapidapi.com",function(err,data){
+               
+                if(err)
+                {
+                    alert(err)
+                }
+                else
+                {
+                    //randomtxt.textContent = data
+                    let matter = data[0].split('')
+                    let matter2 = matter.slice(10,200)
+                    final = matter2.join('')
+                    injection(final)
+                }
+            })
+        }
+    }
+
+
+}
 
 // "https://wordsapiv1.p.rapidapi.com/sentences/?random=true"--> random words
 //"https://baconator-bacon-ipsum.p.rapidapi.com/?sentences=1&paras=0&start-with-lorem=0&type=all-meat" -->sentences(meat)
 //"https://baconator-bacon-ipsum.p.rapidapi.com/?sentences=0&paras=1&start-with-lorem=0&type=all-meat" -->paragraphs(meat)
 //"https://mashape-community-skate-ipsum.p.rapidapi.com/1/1/JSON" -->paragraphs(skate)
-// })
+//"https://contentai-net-text-generation.p.rapidapi.com/text-generation/api/?category=health-and-medicine"(use this)
+var arrTest
+var splitTxt
+let chspan
+function injection(txtContent)
+{
+    splitTxt=txtContent.split('')
+    splitTxt.forEach((character) =>{
+        chspan =document.createElement('span')
+        chspan.innerText = character
+    
+        testText.appendChild(chspan)
+    })
+    
+}
+
+texting.addEventListener('input',()=>{
+  
+    const arrayTest = testText.querySelectorAll('span')
+    const arrayLetters = texting.value.split('')
+    let correct = true
+    arrayTest.forEach((testCharacter,index)=>{
+        const inputChar = arrayLetters[index]
+        if(inputChar == null)
+        {
+            
+            testCharacter.classList.remove('correct')
+            testCharacter.classList.remove('incorrect')
+            correct=false
+        }
+        else {
+            if(inputChar === testCharacter.innerText)
+            {
+
+            testCharacter.classList.add('correct')
+           testCharacter.classList.remove('incorrect')
+                correct=true
+            }
+            else{
+            
+            testCharacter.classList.remove('correct')
+            testCharacter.classList.add('incorrect')
+            correct=false
+            }
+        }
+        
+    })
+    
+    if(correct){
+        apicall()
+        testText.innerText=''
+    }
+})
