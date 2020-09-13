@@ -193,10 +193,11 @@ function apicall()
                 else
                 {
                     //randomtxt.textContent = data
-                    let matter = data[0].split('')
-                    let matter2 = matter.slice(5,50)
+                    let matter0 = data[0].replace(/  +/g, ' ');
+                    let matter1 = matter0.split('')
+                    let matter2 = matter1.slice(20,80)
                     final = matter2.join('')
-                    injection(final)
+                    injection(final.trim())
                 }
             })
 
@@ -211,10 +212,12 @@ function apicall()
                 else
                 {
                     //randomtxt.textContent = data
-                    let matter = data[0].split('')
-                    let matter2 = matter.slice(10,200)
+                    let matter0 = data[0].replace(/  +/g, ' ');
+                    let matter1 = matter0.split('')
+                    let matter2 = matter1.slice(10,280)
                     final = matter2.join('')
-                    injection(final)
+                    
+                    injection(final.trim())
                 }
             })
         }
