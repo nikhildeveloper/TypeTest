@@ -22,7 +22,7 @@ timer =document.querySelector('.timer')
 result =document.querySelector('.result')
 resulttext1 =document.querySelector('#resultText1')
 resulttext2 =document.querySelector('#resultText2')
-
+h=document.querySelector('#h')
 var time;
 var minutes
 var wordCount=0
@@ -75,13 +75,15 @@ typeElements.addEventListener('click',function(e){
 startbtn.addEventListener('click',function(e){
     outer.style.display='none'
     gif.style.display='block'
-    
+    document.body.style.background = 'white'
+    h.textContent=''
     setTimeout(verification,500)
     
 })
 
 function verification(){
-
+    document.body.style.background = '#0d3136'
+    h.textContent='Typing Test'
     if(type!==undefined && time!==undefined)
     {
     gif.style.display='none'
@@ -106,7 +108,7 @@ function verification(){
  var id=0
  var seconds=60
  let count=0
-timeStart.addEventListener('click',function(e){
+texting.addEventListener('click',function(e){
     count++
    
     id = window.setInterval(printMsg,1000)   
@@ -115,9 +117,25 @@ timeStart.addEventListener('click',function(e){
 })
 timeStop.addEventListener('click',stoping)
 
+let dis=0
 function stoping(){
     window.clearInterval(id)
-    texting.disabled=true
+    if(dis===0){
+        texting.disabled=true
+        timeStop.textContent='Start'
+        dis=1
+        //console.log('stop')
+    }
+    else
+    {
+    if(dis===1){
+        texting.disabled=false
+        dis=0
+        timeStop.textContent='Stop'
+        
+    }
+}
+    
 }
 function printMsg()
 {
@@ -133,11 +151,8 @@ function printMsg()
     if(seconds<=9){sec.innerHTML=`0${seconds}`}
     else{sec.innerHTML=seconds}
    if(seconds===0){
-    if(minutes===0 && seconds==0){
+    if(minutes===0 && seconds===0){
         stoping()
-        texting.disabled=true
-        
-        //timer.textContent='Time up'
         timer.style.color='red'
         timeStop.disabled=true
         result.style.display='flex'
@@ -147,8 +162,15 @@ function printMsg()
         accuracy()
         wpm = speed()
         acc = calcAccuracy()
+        
         resulttext1.textContent=`WPM : ${wpm}`
-        resulttext2.textContent=`Accuracy : ${acc}`
+        if(isNaN(acc))
+        {
+        resulttext2.textContent=`Accuracy : ${0}`
+        }
+        else{
+            resulttext2.textContent=`Accuracy : ${acc}`
+        }
         
     }else{
        seconds=59
@@ -221,10 +243,10 @@ function apicall()
                     //randomtxt.textContent = data
                     let matter0 = data[0].replace(/  +/g, ' ').trim();
                     let matter1 = matter0.split('')
-                    let matter2 = matter1.slice(36,190)
+                    let matter2 = matter1.slice(36,210)
                     final = matter2.join('').trim()
                     testWords = final.split(' ')
-                    accuracyCount = 
+                    
                     injection(final.trim())
 
                 }
@@ -341,7 +363,7 @@ function accuracy()
     const arrayTest = testText.querySelectorAll('span')
     const arrayLetters = texting.value.split('')
     totalCountLetters = totalCountLetters + arrayLetters.length
-    console.log('totcountletter ',totalCountLetters)
+    //console.log('totcountletter ',totalCountLetters)
     arrayTest.forEach((letter,index)=>{
         if(letter.classList.contains("correct")){
             correctLettersCount++
@@ -350,7 +372,7 @@ function accuracy()
     })
 }
 function calcAccuracy(){
-    console.log('correctletter ',correctLettersCount)
+    //console.log('correctletter ',correctLettersCount)
     let res=(correctLettersCount/totalCountLetters)*100
     return res.toFixed(2)
 }
