@@ -25,7 +25,8 @@ resulttext2 =document.querySelector('#resultText2')
 
 var time;
 var minutes
-var characterCount=0
+var wordCount=0
+
 const app = new cons()
 const key = '40a04830d2mshabe9414b355c6c4p11095djsnf22fde77863e'
 main.style.display='none'
@@ -142,8 +143,12 @@ function printMsg()
         result.style.display='flex'
         document.body.style.pointerEvents='none'
         result.style.pointerEvents='all'
+        wordCountCalculate()
+        accuracy()
         wpm = speed()
-        resulttext1.textContent=`WPS :${wpm}`
+        acc = calcAccuracy()
+        resulttext1.textContent=`WPM : ${wpm}`
+        resulttext2.textContent=`Accuracy : ${acc}`
         
     }else{
        seconds=59
@@ -155,22 +160,6 @@ function printMsg()
    }
    
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -188,13 +177,15 @@ function apicall()
             }                                                                                              
             else
             {
-                console.log(data)
-                //randomtxt.textContent = data
-                injection(data.word)
+                
+                let matter0 = data.word.replace(/  +/g, ' ').trim();
+                
+                testWords = matter0.split(' ')
+                injection(matter0)
             }
         })
     }
-    else{//paragraphs
+    else{//sentences
         if(type==='2')
         {
             
@@ -207,16 +198,18 @@ function apicall()
                 else
                 {
                     //randomtxt.textContent = data
-                    let matter0 = data[0].replace(/  +/g, ' ');
+                    let matter0 = data[0].replace(/  +/g, ' ').trim();
                     let matter1 = matter0.split('')
-                    let matter2 = matter1.slice(20,80)
-                    final = matter2.join('')
+                    let matter2 = matter1.slice(23,80)
+                    final = matter2.join('').trim()
+                    testWords = final.split(' ')
                     injection(final.trim())
                 }
             })
 
         }
-        else{
+        else{//paragraphs
+            
             app.get("https://mashape-community-skate-ipsum.p.rapidapi.com/1/1/JSON" ,key,"mashape-community-skate-ipsum.p.rapidapi.com",function(err,data){
                
                 if(err)
@@ -226,12 +219,14 @@ function apicall()
                 else
                 {
                     //randomtxt.textContent = data
-                    let matter0 = data[0].replace(/  +/g, ' ');
+                    let matter0 = data[0].replace(/  +/g, ' ').trim();
                     let matter1 = matter0.split('')
-                    let matter2 = matter1.slice(10,160)
-                    final = matter2.join('')
-                    
+                    let matter2 = matter1.slice(36,190)
+                    final = matter2.join('').trim()
+                    testWords = final.split(' ')
+                    accuracyCount = 
                     injection(final.trim())
+
                 }
             })
         }
@@ -240,14 +235,11 @@ function apicall()
 
 }
 
-// "https://wordsapiv1.p.rapidapi.com/sentences/?random=true"--> random words
-//"https://baconator-bacon-ipsum.p.rapidapi.com/?sentences=1&paras=0&start-with-lorem=0&type=all-meat" -->sentences(meat)
-//"https://baconator-bacon-ipsum.p.rapidapi.com/?sentences=0&paras=1&start-with-lorem=0&type=all-meat" -->paragraphs(meat)
-//"https://mashape-community-skate-ipsum.p.rapidapi.com/1/1/JSON" -->paragraphs(skate)
-//"https://contentai-net-text-generation.p.rapidapi.com/text-generation/api/?category=health-and-medicine"(use this)
+
 var arrTest
 var splitTxt
 let chspan
+let testWords
 function injection(txtContent)
 {
     splitTxt=txtContent.split('')
@@ -261,7 +253,7 @@ function injection(txtContent)
 }
 
 texting.addEventListener('input',()=>{
-  
+    
     const arrayTest = testText.querySelectorAll('span')
     const arrayLetters = texting.value.split('')
     let correct = true
@@ -280,8 +272,8 @@ texting.addEventListener('input',()=>{
 
             testCharacter.classList.add('correct')
            testCharacter.classList.remove('incorrect')
-                correct=true
-                characterCount++
+               correct=true
+                
             }
             else{
             
@@ -294,15 +286,20 @@ texting.addEventListener('input',()=>{
     })
     
     if(correct){
+        wordCountCalculate()
+        accuracy()
         apicall()
         testText.innerText=''
     }
+
 })
 
 function funcclose()
 {
-  result.style.display='none'
-  
+    result.style.display='none'
+    wordCount=0
+    correctLettersCount=0
+    totalCountLetters=0
     result.style.pointerEvents
     document.body.style.pointerEvents='all'
     main.style.display='none'
@@ -316,14 +313,44 @@ function funcclose()
      timeStop.disabled=false
      texting.value=null
      testText.innerText=''
-    console.log(minutes)
-    console.log(time)
-    
 }
 function speed()
 {
     let T = Number(time)
-    let charCount = characterCount
-    return (5*charCount)/T
+    return wordCount/T
 }
 
+function wordCountCalculate()
+{
+    const arrayWords = texting.value.split(' ')
+    
+        testWords.forEach((word,index)=>{
+        const testWord = arrayWords[index]
+        if(testWord === word)
+        {
+            wordCount++
+            //console.log('yes',wordCount)
+        }
+
+    })
+}
+let correctLettersCount=0
+let totalCountLetters=0
+function accuracy()
+{
+    const arrayTest = testText.querySelectorAll('span')
+    const arrayLetters = texting.value.split('')
+    totalCountLetters = totalCountLetters + arrayLetters.length
+    console.log('totcountletter ',totalCountLetters)
+    arrayTest.forEach((letter,index)=>{
+        if(letter.classList.contains("correct")){
+            correctLettersCount++
+        }
+        
+    })
+}
+function calcAccuracy(){
+    console.log('correctletter ',correctLettersCount)
+    let res=(correctLettersCount/totalCountLetters)*100
+    return res.toFixed(2)
+}
